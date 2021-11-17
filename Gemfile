@@ -31,6 +31,10 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # debase is a fast implementation of the standard debugger debug.rb for Ruby 2.0.0.
+  gem 'debase'
+  # The 'ruby-debug-ide' gem provides the protocol to establish communication between the debugger engine (such as debase or ruby-debug-base) and IDEs (for example, RubyMine, Visual Studio Code, or Eclipse).
+  gem 'ruby-debug-ide'
 end
 
 group :development do
