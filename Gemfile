@@ -35,6 +35,8 @@ group :development, :test do
   gem 'debase'
   # The 'ruby-debug-ide' gem provides the protocol to establish communication between the debugger engine (such as debase or ruby-debug-base) and IDEs (for example, RubyMine, Visual Studio Code, or Eclipse).
   gem 'ruby-debug-ide'
+  # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
+  gem 'rspec-rails', '~> 5.0.0'
 end
 
 group :development do
