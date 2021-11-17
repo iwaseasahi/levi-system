@@ -13,14 +13,28 @@ on:
 jobs:
   run-lint:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:13.5
+        ports:
+          - 5432:5432
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Setup Ruby and install gems
         uses: ruby/setup-ruby@v1
+        env:
+          RAILS_ENV: test
         with:
           bundler-cache: true
+      - name: Wait for DB
+        run: dockerize -wait tcp://127.0.0.1:5432 -timeout 120s
+      - name: Database setup
+        run: bin/rake db:create db:migrate
       # Add or Replace any other Linters here
       - name: Run linters
         run: |
