@@ -1,0 +1,43 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will download a prebuilt Ruby version, install dependencies, and  run linters
+name: Rails - Install dependencies and run linters
+
+on:
+  push:
+    branches-ignore: [ main ]
+  pull_request:
+    branches-ignore: [ main ]
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    env:
+      RAILS_ENV: test
+    services:
+      postgres:
+        image: postgres:13.5
+        env:
+          POSTGRES_USER: root
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        # Add a health check
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Install postgres headers
+        run: |
+          sudo apt-get update
+          sudo apt-get install libpq-dev
+      - name: Setup database
+        run: bundle exec rake db:setup
+      - name: Run factory_bot lint
+        run: bin/rake factory_bot:lint
