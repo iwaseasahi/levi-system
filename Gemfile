@@ -37,6 +37,9 @@ group :development, :test do
   gem 'ruby-debug-ide'
   # rspec-rails brings the RSpec testing framework to Ruby on Rails as a drop-in alternative to its default testing framework, Minitest.
   gem 'rspec-rails', '~> 5.0.0'
+  # factory_bot is a fixtures replacement with a straightforward definition syntax, support for multiple build strategies (saved instances, unsaved instances,
+  # attribute hashes, and stubbed objects), and support for multiple factories for the same class (user, admin_user, and so on), including factory inheritance.
+  gem 'factory_bot_rails'
 end
 
 group :development do
