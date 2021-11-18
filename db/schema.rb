@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_17_112234) do
+ActiveRecord::Schema.define(version: 2021_11_18_005157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,8 @@ ActiveRecord::Schema.define(version: 2021_11_17_112234) do
     t.string "english", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["english"], name: "index_book_names_on_english", unique: true
+    t.index ["japanese"], name: "index_book_names_on_japanese", unique: true
   end
 
 end
