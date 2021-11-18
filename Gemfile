@@ -40,6 +40,8 @@ group :development, :test do
   # factory_bot is a fixtures replacement with a straightforward definition syntax, support for multiple build strategies (saved instances, unsaved instances,
   # attribute hashes, and stubbed objects), and support for multiple factories for the same class (user, admin_user, and so on), including factory inheritance.
   gem 'factory_bot_rails'
+  # Seed Fu is an attempt to once and for all solve the problem of inserting and maintaining seed data in a database.
+  gem 'seed-fu', '~> 2.3'
 end
 
 group :development do

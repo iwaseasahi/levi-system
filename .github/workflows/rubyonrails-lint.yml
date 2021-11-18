@@ -41,3 +41,5 @@ jobs:
         run: bundle exec rake db:setup
       - name: Run factory_bot lint
         run: bin/rake factory_bot:lint
+      - name: Run seed_fu lint
+        run: bin/rake seed_fu:lint
