@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_19_122705) do
+ActiveRecord::Schema.define(version: 2021_11_19_130324) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,18 @@ ActiveRecord::Schema.define(version: 2021_11_19_122705) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["english"], name: "index_book_names_on_english", unique: true
     t.index ["japanese"], name: "index_book_names_on_japanese", unique: true
+  end
+
+  create_table "bookmarks", force: :cascade do |t|
+    t.bigint "folder_id", null: false
+    t.string "title", null: false
+    t.string "action_name", null: false
+    t.string "controller_name", null: false
+    t.text "params_value", null: false
+    t.integer "position", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["folder_id"], name: "index_bookmarks_on_folder_id"
   end
 
   create_table "books", force: :cascade do |t|
@@ -45,5 +57,6 @@ ActiveRecord::Schema.define(version: 2021_11_19_122705) do
     t.index ["title"], name: "index_folders_on_title", unique: true
   end
 
+  add_foreign_key "bookmarks", "folders"
   add_foreign_key "books", "book_names"
 end
