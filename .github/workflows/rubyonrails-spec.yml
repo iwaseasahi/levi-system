@@ -37,6 +37,8 @@ jobs:
         with:
           node-version: '14'
           cache: yarn
+      - name: Yarn install
+        run: yarn install
       - name: Setup database
         run: bundle exec rake db:setup
       - name: Compile webpacker
