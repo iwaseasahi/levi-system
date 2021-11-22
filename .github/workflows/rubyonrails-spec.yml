@@ -32,7 +32,14 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install libpq-dev
+      - name: Setup node and install packages
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: yarn
       - name: Setup database
         run: bundle exec rake db:setup
+      - name: Compile webpacker
+        run: bundle exec rails webpacker:compile
       - name: Run RSpec
         run: bundle exec rspec --profile 10
